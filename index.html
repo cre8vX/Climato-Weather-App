@@ -3,24 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Climato Weather</title>
+    <title>SkyCast Weather</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Poppins Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="weather-container">
+
+    <div class="app-container">
+        <!-- Search Box -->
         <div class="search-box">
-            <input type="text" id="txtSearchId" placeholder="Search city...">
-            <button class="btn-search" onclick="btnSearchOnAction()">🔍</button>
-            <button class="btn-loc" onclick="getUserLocation()" title="My Location">📍</button>
+            <input type="text" id="txtSearchId" placeholder="Search city (e.g. Galle, London)">
+            <button onclick="btnSearchOnAction()">🔍</button>
+            <button onclick="getUserLocation()" title="My Location">📍</button>
         </div>
-        
-        <div id="contentSection" class="weather-content">
-            <p style="color: rgba(255,255,255,0.7); margin-top: 20px;">
-                Enter a city or use location to check the weather
-            </p>
+
+        <!-- සියලුම දත්ත පෙන්වන ප්‍රධාන කොටස -->
+        <div id="weatherContent" class="weather-card" style="display: none;">
+            <!-- Current Weather -->
+            <div class="current-info">
+                <p id="dateTime" class="date-time"></p>
+                <div class="main-temp-row">
+                    <img id="mainIcon" src="" alt="icon">
+                    <div class="temp-details">
+                        <h1 id="mainCondition"></h1>
+                        <h2 id="mainTemp"></h2>
+                    </div>
+                </div>
+                <p id="locationName" class="location"></p>
+            </div>
+
+            <!-- Sun Times -->
+            <div class="sun-times">
+                <span>🌅 <span id="sunrise"></span></span>
+                <span>---</span>
+                <span>🌇 <span id="sunset"></span></span>
+            </div>
+
+            <!-- Rain & Stats -->
+            <div class="stats-row">
+                <div class="rain-chance">
+                    <span>🌧️ Rain: <span id="rainChance"></span>%</span>
+                </div>
+            </div>
+            <div class="humidity-wind">
+                <span>Humidity: <span id="humidity"></span>%</span>
+                <span>Wind: <span id="wind"></span> km/h</span>
+            </div>
+
+            <!-- Forecast Container -->
+            <div class="forecast-container" id="forecastList">
+                <!-- JS මඟින් දවස් ටික මෙතනට ඇතුළත් කරයි -->
+            </div>
         </div>
+
+        <!-- මුලින්ම පෙන්වන පණිවිඩය -->
+        <p id="welcomeText" class="welcome-text">Search a city to get started</p>
     </div>
 
     <script src="app.js"></script>
