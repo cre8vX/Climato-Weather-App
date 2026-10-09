@@ -8,8 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Background Video for Welcome Screen -->
+    <video autoplay muted loop playsinline id="bgVideo">
+        <source src="vid/5680241-hd_1920_1080_30fps.mp4" type="video/mp4">
+    </video>
+    <!-- Video එක අඳුරු කර Search Box එක පැහැදිලිව පෙන්වීමට Overlay එකක් -->
+    <div id="videoOverlay" class="video-overlay"></div>
 
     <div class="app-container">
+        
+        
         <!-- Search Box -->
         <div class="search-box">
             <input type="text" id="txtSearchId" placeholder="Search city (e.g. Galle, London)">

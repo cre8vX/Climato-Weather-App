@@ -46,12 +46,20 @@ function fetchWeatherData(query) {
 }
 
 function displayWeather(data) {
-    // 1. Weather එක අනුව Background Wallpaper එක මාරු කරන්න මෙතනින් call කරනවා
+    // 0. වීඩියෝව සහ Overlay එක සඟවා Wallpaper එක පෙන්වීම
+    const bgVideo = document.getElementById("bgVideo");
+    const videoOverlay = document.getElementById("videoOverlay");
+    if (bgVideo) bgVideo.style.display = "none";
+    if (videoOverlay) videoOverlay.style.display = "none";
+
+    // 1. Weather එක අනුව Background Wallpaper එක මාරු කිරීම
     updateBackground(data.current.condition.text);
 
     // Welcome text එක අයින් කර Weather Card එක පෙන්වීම
     document.getElementById("welcomeText").style.display = "none";
     document.getElementById("weatherContent").style.display = "block";
+
+    
 
     // Current Weather
     let dateObj = new Date(data.location.localtime);
