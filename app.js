@@ -1,6 +1,7 @@
 const apiKey = "f2e2ecd5ae0a4b65bc1223128260710";
 const baseUrl = "https://api.weatherapi.com/v1";
 
+
 function btnSearchOnAction() {
     let txtUserSearchValue = document.getElementById("txtSearchId").value;
     if(txtUserSearchValue === "") {
@@ -24,9 +25,9 @@ function getUserLocation() {
     }
 }
 
-// API Call එක (current වෙනුවට forecast.json පාවිච්චි කර ඇත)
+
 function fetchWeatherData(query) {
-    // දින 7ක දත්ත ඉල්ලමු (Free Tier එකේ දින 3ක් පමණක් ලැබිය හැක)
+    
     let fetchUrl = `${baseUrl}/forecast.json?key=${apiKey}&q=${query}&days=7`;
 
     fetch(fetchUrl)
@@ -45,11 +46,14 @@ function fetchWeatherData(query) {
 }
 
 function displayWeather(data) {
-    // Welcome text එක හංගලා, Weather Card එක පෙන්වීම
+    // 1. Weather එක අනුව Background Wallpaper එක මාරු කරන්න මෙතනින් call කරනවා
+    updateBackground(data.current.condition.text);
+
+    // Welcome text එක අයින් කර Weather Card එක පෙන්වීම
     document.getElementById("welcomeText").style.display = "none";
     document.getElementById("weatherContent").style.display = "block";
 
-    // 1. ප්‍රධාන දත්ත (Current Weather)
+    // Current Weather
     let dateObj = new Date(data.location.localtime);
     let options = { weekday: 'long', hour: '2-digit', minute:'2-digit' };
     document.getElementById("dateTime").innerText = dateObj.toLocaleDateString('en-US', options);
@@ -59,7 +63,7 @@ function displayWeather(data) {
     document.getElementById("mainTemp").innerText = `${data.current.temp_c}°C`;
     document.getElementById("locationName").innerText = `${data.location.name}, ${data.location.country}`;
 
-    // 2. අද දවසේ අමතර දත්ත (Sun times & Rain)
+    // (Sun times & Rain)
     // forecastday[0] යනු අද දිනයයි
     let todayForecast = data.forecast.forecastday[0];
     
@@ -69,12 +73,12 @@ function displayWeather(data) {
     document.getElementById("humidity").innerText = data.current.humidity;
     document.getElementById("wind").innerText = data.current.wind_kph;
 
-    // 3. ඉදිරි දිනවල දත්ත (Forecast List)
+    // (Forecast List)
     let forecastListContainer = document.getElementById("forecastList");
-    forecastListContainer.innerHTML = ""; // කලින් තිබුණු දත්ත මකා දැමීම
+    forecastListContainer.innerHTML = ""; 
 
     data.forecast.forecastday.forEach((dayData, index) => {
-        // දවසේ නම ගැනීම (අද නම් 'Today' ලෙස පෙන්වීමට)
+       
         let dayName = "Today";
         if (index > 0) {
             let dayDateObj = new Date(dayData.date);
@@ -95,4 +99,40 @@ function displayWeather(data) {
         `;
         forecastListContainer.innerHTML += forecastHTML;
     });
+}
+
+// Weather condition එක අනුව Background Wallpaper මාරු කරන Function එක
+function updateBackground(conditionText) {
+    let text = conditionText.toLowerCase();
+    
+    // Default රූපය (නොදන්නා තත්ත්වයක් ආවොත් පෙන්වීමට)
+    let bgUrl = "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2064&auto=format&fit=crop"; 
+
+    if (text.includes("rain") || text.includes("drizzle") || text.includes("shower")) {
+        // වැස්ස 
+        bgUrl = "https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80&w=2070&auto=format&fit=crop"; 
+    } else if (text.includes("cloud") || text.includes("overcast")) {
+        // වලාකුළු සහිත 
+        bgUrl = "https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=2000&auto=format&fit=crop"; 
+    } else if (text.includes("thunder") || text.includes("storm")) {
+        // ගිගුරුම් සහිත 
+        bgUrl = "https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?q=80&w=2071&auto=format&fit=crop"; 
+    } else if (text.includes("sunny") || text.includes("clear")) {
+        // පැහැදිලි / සාමාන්‍ය 
+        bgUrl = "https://images.unsplash.com/photo-1601297183314-c09d33f11c75?q=80&w=2070&auto=format&fit=crop"; 
+    } else if (text.includes("snow") || text.includes("ice") || text.includes("blizzard")) {
+        // හිම වැටෙන 
+        bgUrl = "https://images.unsplash.com/photo-1542601098-35616235beff?q=80&w=2038&auto=format&fit=crop";
+    } else if (text.includes("mist") || text.includes("fog")) {
+        // මීදුම සහිත
+        bgUrl = "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?q=80&w=1973&auto=format&fit=crop";
+    }
+    else if (text.includes("sunny") || text.includes("clear")) {
+    // Sunny 
+    bgUrl = "https://images.unsplash.com/photo-1601297183314-c09d33f11c75?q=80&w=2070&auto=format&fit=crop"; 
+    }
+
+    // අලුත් Wallpaper එක මාරු කිරීම
+    document.body.style.background = `linear-gradient(rgba(6, 20, 27, 0.5), rgba(6, 20, 27, 0.7)), url('${bgUrl}') no-repeat center center fixed`;
+    document.body.style.backgroundSize = "cover";
 }
