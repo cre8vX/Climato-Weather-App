@@ -1,8 +1,8 @@
 const apiKey = "f2e2ecd5ae0a4b65bc1223128260710";
-// අනිවාර්යයෙන්ම https පාවිච්චි කරන්න
+
 const baseUrl = "https://api.weatherapi.com/v1"; 
 
-// 1. City එකක් Search කිරීම
+// Search City 
 function btnSearchOnAction() {
     let txtUserSearchValue = document.getElementById("txtSearchId").value;
     
@@ -26,7 +26,7 @@ function btnSearchOnAction() {
         });
 }
 
-// 2. User ගේ Location එක ගැනීම
+// 2. User's Location 
 function getUserLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -54,11 +54,10 @@ function getUserLocation() {
     }
 }
 
-// 3. UI එකට දත්ත ඇතුළත් කිරීම (අලුත් Glassmorphism පෙනුමට අදාළව)
 function displayWeather(data) {
     let contentSection = document.getElementById("contentSection");
 
-    // Weather API එකෙන් එන icon url එක //cdn... විදියට එන නිසා මුලට https: එකතු කිරීම
+
     let iconUrl = "https:" + data.current.condition.icon.replace('64x64', '128x128');
 
     contentSection.innerHTML = `
