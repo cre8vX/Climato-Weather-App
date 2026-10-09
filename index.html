@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimaSync</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- නවීන පෙනුමක් සඳහා Poppins Font එක -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="weather-container">
+        <div class="search-box">
+            <input type="text" id="txtSearchId" placeholder="Search city...">
+            <button class="btn-search" onclick="btnSearchOnAction()">🔍</button>
+            <button class="btn-loc" onclick="getUserLocation()" title="My Location">📍</button>
+        </div>
+        
+        <div id="contentSection" class="weather-content">
+            <p style="color: rgba(255,255,255,0.7); margin-top: 20px;">
+                Enter a city or use location to check the weather
+            </p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
