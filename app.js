@@ -117,7 +117,7 @@ function updateBackground(conditionText) {
     // let bgUrl = "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2064&auto=format&fit=crop"; 
 
     // Default වීඩියෝව (නොදන්නා තත්ත්වයක් ආවොත් පෙන්වීමට Welcome screen එකේ video එකම දෙන්න)
-    let videoUrl = "vid/1.mp4"; // Default video
+    let videoUrl = "vid/2.mp4"; // Default video
 
     if (text.includes("rain") || text.includes("drizzle") || text.includes("shower")) {
         // Rain 
@@ -134,7 +134,7 @@ function updateBackground(conditionText) {
     } else if (text.includes("snow") || text.includes("ice") || text.includes("blizzard")) {
         // Snow  
         videoUrl = "vid/snow.mp4";
-    } else if (text.includes("mist") || text.includes("fog")) {
+    } else if (text.includes("mist") || text.includes("fog") || text.includes("smoky haze")) {
         // Mist 
         videoUrl = "vid/mist.mp4";
     }
