@@ -46,7 +46,7 @@ function fetchWeatherData(query) {
 }
 
 function displayWeather(data) {
-    // // 0. වීඩියෝව සහ Overlay එක සඟවා Wallpaper එක පෙන්වීම
+    // video සහ Overlay එක සඟවා Wallpaper එක පෙන්වීම
     // const bgVideo = document.getElementById("bgVideo");
     // const videoOverlay = document.getElementById("videoOverlay");
     // if (bgVideo) bgVideo.style.display = "none";
@@ -58,7 +58,7 @@ function displayWeather(data) {
     document.getElementById("welcomeText").style.display = "none";
     document.getElementById("weatherContent").style.display = "block";
 
-    // 1. Weather එක අනුව Background Video එක මාරු කිරීම
+    // Weather එක අනුව Background Video එක change කිරීම
     updateBackground(data.current.condition.text);    
 
     // Current Weather
@@ -109,41 +109,38 @@ function displayWeather(data) {
     });
 }
 
-// Weather condition එක අනුව Background Wallpaper මාරු කරන Function එක
+// Weather condition එක අනුව Background Wallpaper Change කරන Function එක
 function updateBackground(conditionText) {
     let text = conditionText.toLowerCase();
     
-    // // Default රූපය (නොදන්නා තත්ත්වයක් ආවොත් පෙන්වීමට)
+    // // Default img (නොදන්නා තත්ත්වයක් ආවොත් පෙන්වීමට)
     // let bgUrl = "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2064&auto=format&fit=crop"; 
 
     // Default වීඩියෝව (නොදන්නා තත්ත්වයක් ආවොත් පෙන්වීමට Welcome screen එකේ video එකම දෙන්න)
     let videoUrl = "vid/1.mp4"; // Default video
 
     if (text.includes("rain") || text.includes("drizzle") || text.includes("shower")) {
-        // වැස්ස 
+        // Rain 
         videoUrl = "vid/rain.mp4"; 
     } else if (text.includes("cloud") || text.includes("overcast")) {
-        // වලාකුළු සහිත 
+        // Cloudy  
         videoUrl = "vid/cloudy.mp4"; 
     } else if (text.includes("thunder") || text.includes("storm")) {
-        // ගිගුරුම් සහිත 
+        // Thunder  
         videoUrl = "vid/thunder.mp4"; 
     } else if (text.includes("sunny") || text.includes("clear")) {
-        // පැහැදිලි / සාමාන්‍ය 
+        // Clear / Normal 
         videoUrl = "vid/sunny.mp4"; 
     } else if (text.includes("snow") || text.includes("ice") || text.includes("blizzard")) {
-        // හිම වැටෙන 
+        // Snow  
         videoUrl = "vid/snow.mp4";
     } else if (text.includes("mist") || text.includes("fog")) {
-        // මීදුම සහිත
+        // Mist 
         videoUrl = "vid/mist.mp4";
     }
-    else if (text.includes("sunny") || text.includes("clear")) {
-    // Sunny 
-    videoUrl = "vid/sunny.mp4"; 
-    }
+    
 
-    // // අලුත් Wallpaper එක මාරු කිරීම
+    // අලුත් Wallpaper එක මාරු කිරීම
     // document.body.style.background = `linear-gradient(rgba(6, 20, 27, 0.5), rgba(6, 20, 27, 0.7)), url('${bgUrl}') no-repeat center center fixed`;
     // document.body.style.backgroundSize = "cover";
 
